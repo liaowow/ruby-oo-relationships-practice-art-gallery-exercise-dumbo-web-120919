@@ -36,26 +36,31 @@ class Artist
   # Returns an instance of the artist with the highest amount of paintings per year of experience.
   def self.most_prolific
     # get amount of paintings for each artist
-    num_of_paintings_per_artist = {}
-    Painting.all.each do |painting_object|
-      if !num_of_paintings_per_artist[painting_object.artist]
-        num_of_paintings_per_artist[painting_object.artist] = 1
-      else
-        num_of_paintings_per_artist[painting_object.artist] += 1
-      end
-    end
+    # num_of_paintings_per_artist = {}
+    # Painting.all.each do |painting_object|
+    #   if !num_of_paintings_per_artist[painting_object.artist]
+    #     num_of_paintings_per_artist[painting_object.artist] = 1
+    #   else
+    #     num_of_paintings_per_artist[painting_object.artist] += 1
+    #   end
+    # end
 
-    # amount of paintings / artist years_experience
-    most_prolific_amount = 0
-    most_prolific_artist = []
-    num_of_paintings_per_artist.each do |artist, num|
-      artist_amount_per_experience = num / artist.years_experience
-      if artist_amount_per_experience > most_prolific_amount
-        most_prolific_amount = artist_amount_per_experience
-        most_prolific_artist = artist
+    # # amount of paintings / artist years_experience
+    # most_prolific_amount = 0
+    # most_prolific_artist = []
+    # num_of_paintings_per_artist.each do |artist, num|
+    #   artist_amount_per_experience = num / artist.years_experience
+    #   if artist_amount_per_experience > most_prolific_amount
+    #     most_prolific_amount = artist_amount_per_experience
+    #     most_prolific_artist = artist
+    #   end
+    # end
+    # most_prolific_artist
+
+    ### solution code ###
+      self.all.max_by do |artist|
+        artist.paintings.length / artist.years_experience
       end
-    end
-    most_prolific_artist
   end
 
   def self.all
